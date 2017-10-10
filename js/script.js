@@ -37,10 +37,3 @@ function loadData() {
 };
 
 $('#form-container').submit(loadData);
-=======
-
-    return false;
-};
-
-$('#form-container').submit(loadData);
->>>>>>> 4b2ad80cbf2f9f6cec7cfa49b9351c4c1b4c71d5
