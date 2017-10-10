@@ -53,23 +53,6 @@ function loadData() {
 
     });
 
-    var wiki_api_call = $.ajax({
-        type: 'GET',
-        // so we get json and it'll add callback=? automatically
-        dataType: 'jsonp',
-        url: wiki_entry_url,
-        data: wiki_data,
-        // set a timeout manually since its jsonp and won't fail like an XHR
-        timeout: 5000
-    });
-
-    // handle errors
-    wiki_api_call.fail(function() {
-        console.log('wikipedia request failed');
-        // show an error message in the wikipedia container in the dom
-        $wiki_container.html("<h3>Something went wrong with loading the Wikipedia articles, you'll have to try again.</h3>");
-    });
-
     return false;
 };
 
