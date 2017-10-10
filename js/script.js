@@ -23,15 +23,15 @@ function loadData() {
 
     // NYTimes AJAX request to load NYTimes information
     var nytimesUrl = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + cityStr + '&sort=newest&api-key=12bf6b4ce1a14f938f87f65f49fe5bdd'
-    $.getJSON(nytimesUrl, function(data){
+    $.getJSON(nytimesUrl, function(data) {
         $nytHeaderElem.text('New York Times Articles About ' + cityStr);
 
         articles = data.response.docs;
         for (var i = 0; i < articles.length; i++) {
             var article = articles[i];
-            $nytElem.append('<li class="article">'+'<a href="'+article.web_url+'">'+article.headline.main+'</a>'+'<p>' + article.snippet + '</p>'+'</li>');
+            $nytElem.append('<li class="article">' + '<a href="' + article.web_url + '">' + article.headline.main + '</a>' + '<p>' + article.snippet + '</p>' + '</li>');
         };
-    }).fail(function(e){
+    }).fail(function(e) {
         $nytHeaderElem.text('New York Times Articles Could Not Be Loaded');
     });
 
@@ -41,7 +41,7 @@ function loadData() {
         url: wikiUrl,
         dataType: "jsonp",
         // jsonp: "callback",
-        success: function(response){
+        success: function(response) {
             var articleList = response[1];
 
             for (var i = 0; i < articleList.length; i++) {
@@ -51,6 +51,23 @@ function loadData() {
             };
         }
 
+    });
+
+    var wiki_api_call = $.ajax({
+        type: 'GET',
+        // so we get json and it'll add callback=? automatically
+        dataType: 'jsonp',
+        url: wiki_entry_url,
+        data: wiki_data,
+        // set a timeout manually since its jsonp and won't fail like an XHR
+        timeout: 5000
+    });
+
+    // handle errors
+    wiki_api_call.fail(function() {
+        console.log('wikipedia request failed');
+        // show an error message in the wikipedia container in the dom
+        $wiki_container.html("<h3>Something went wrong with loading the Wikipedia articles, you'll have to try again.</h3>");
     });
 
     return false;
