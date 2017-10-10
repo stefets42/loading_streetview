@@ -21,8 +21,9 @@ function loadData() {
 
     var streetviewUrl = 'http://maps.googleapis.com/maps/api/streetview?size=600x400&location=' + address + '';
 
-    $body.append('<img class="bgimg" src="' + streetviewUrl + '">')
+    $body.append('<img class="bgimg" src="' + streetviewUrl + '">');
 
+    return false;
+};
 
-
-    $('#form-container').submit(loadData);
+$('#form-container').submit(loadData);
