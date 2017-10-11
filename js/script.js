@@ -36,7 +36,7 @@ function loadData() {
     });
 
     // Wikipedia AJAX request to load NYTimes information
-    var wikiUrl = 'https://en.wikipedi.org/w/api.php?action=opensearch&search=' + cityStr + '&format=json&callback=wikiCallback';
+    var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + cityStr + '&format=json&callback=wikiCallback';
     
     var wikiRequestTimeout = setTimeout(function(){
         $wikiElem.text("failed to get Wikipedia resources");
